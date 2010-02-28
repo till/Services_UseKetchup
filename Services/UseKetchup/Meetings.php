@@ -24,9 +24,13 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return $this->show($lean, true);
     }
 
-    public function show($lean = false, $ics = false)
+    public function previous($lean = false)
     {
-        $url = '/meetings.';
+        return $this->show($lean, false, '/meetings/previous.');
+    }
+
+    public function show($lean = false, $ics = false, $url = '/meetings.')
+    {
         if ($ics === false) {
             $url .= 'json';
         } else {
@@ -39,6 +43,16 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         $resp = $this->makeRequest($url);
         $data = $this->parseResponse($resp);
         return $data;
+    }
+
+    public function todays($lean = false)
+    {
+        return $this->show($lean, false, '/meetings/todays.');
+    }
+
+    public function upcoming($lean = false)
+    {
+        return $this->show($lean, false, '/meetings/upcoming.');
     }
 
     public function update($meeting)

@@ -82,6 +82,25 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
         $this->assertContains('PRODID://Hyper Tiny//Ketchup//EN', $ics);
     }
 
+    public function testPrevious()
+    {
+        $previous = $this->useKetchup->meetings->previous();
+        $this->assertTrue(is_array($previous));
+    }
+
+    public function testUpcoming()
+    {
+        $upcoming = $this->useKetchup->meetings->upcoming();
+        $this->assertTrue(is_array($upcoming));
+    }
+
+    public function testTodays()
+    {
+        $todays = $this->useKetchup->meetings->todays();
+        $this->assertTrue(is_array($todays));
+        $this->assertNotNull($todays);
+    }
+
     // Items
 
     // Notes
