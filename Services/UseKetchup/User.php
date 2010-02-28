@@ -10,7 +10,7 @@ class Services_UseKetchup_User extends Services_UseKetchup_Common
             $data
         );
         $data = $this->parseResponse($resp);
-        if ($data === null) {
+        if ($data !== null) {
             return true;
         }
         return false;
@@ -25,7 +25,7 @@ class Services_UseKetchup_User extends Services_UseKetchup_Common
             $data
         );
         $data = $this->parseResponse($resp);
-        if ($data === null) {
+        if ($data !== null) {
             return true;
         }
         return false;
