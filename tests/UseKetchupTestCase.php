@@ -42,21 +42,28 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
         $lastCreated = $this->useKetchup->meetings->getLastCreated();
         $this->assertEquals($meeting->project_name, $lastCreated->project_name);
 
-        $project               = new stdClass;
-        $project->id           = $lastCreated->shortcode_url; // need different one
-        $project->project_name = "This is an updated project name";
-
-        // $this->assertTrue($this->useKetchup->projects->update($project));
-
         $projects = $this->useKetchup->projects->show();
 
-        $this->assertNotNull($projects);
-        $this->assertNotEquals(0, count($projects));
+        $totalProjects = count($projects);
         $this->assertTrue(is_array($projects));
+        $this->assertNotNull($projects);
+        $this->assertTrue(is_array($projects));
+
+        $project       = new stdClass;
+        $project->id   = $projects[$totalProjects-1]->shortcode_url;
+        $project->name = "This is an updated project name";
+
+        $this->assertTrue($this->useKetchup->projects->update($project));
+
         $this->assertTrue(($projects[0] instanceof stdClass));
     }
 
     // Meetings
+
+    public function testMeetings()
+    {
+        
+    }
 
     // Items
 
