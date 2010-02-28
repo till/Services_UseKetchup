@@ -76,6 +76,7 @@ abstract class Services_UseKetchup_Common
         switch ($body) {
         case 'Access Denied':
             throw new RuntimeException("API response: {$body}");
+        case 'Item Deleted Successfully':
         case 'Meeting Deleted Successfully':
             return $body;
         default:

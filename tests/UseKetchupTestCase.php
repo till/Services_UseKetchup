@@ -121,7 +121,31 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
 
     // Items
 
-    
+    public function testItems()
+    {
+        $meeting        = new stdClass;
+        $meeting->title = 'Item test!';
+
+        $this->useKetchup->meetings->add($meeting);
+
+        $meeting = $this->useKetchup->meetings->getLastCreated();
+
+        $item          = new stdClass;
+        $item->content = 'This be an item!';
+
+        $this->assertTrue($this->useKetchup->items->add($meeting, $item));
+
+        $lastCreated = $this->useKetchup->items->getLastCreated();
+
+        $items = $this->useKetchup->items->show($meeting);
+
+        $this->assertTrue(is_array($items));
+        $this->assertNotEquals(0, count($items));
+
+        $this->assertTrue($this->useKetchup->items->delete($lastCreated));
+
+        $this->useKetchup->meetings->delete($meeting);
+    }    
 
     // Notes
 
