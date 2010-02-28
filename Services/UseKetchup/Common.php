@@ -86,6 +86,7 @@ abstract class Services_UseKetchup_Common
             throw new RuntimeException("API response: {$body}");
         case 'Item Deleted Successfully':
         case 'Meeting Deleted Successfully':
+        case 'Note Deleted Successfully':
             return $body;
         default:
             $resp = json_decode($body);
