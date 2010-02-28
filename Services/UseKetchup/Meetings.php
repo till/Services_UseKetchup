@@ -19,6 +19,24 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return false;
     }
 
+    public function delete($meeting)
+    {
+        if ($meeting instanceof stdClass) {
+            $id = $meeting->shortcode_url;
+        } else {
+            $id = $meeting;
+        }
+        $resp = $this->makeRequest(
+            "/meetings/{$id}.json",
+            HTTP_Request2::METHOD_DELETE
+        );
+        $data = $this->parseResponse($resp);
+        if ($data === 'Meeting Deleted Successfully') {
+            return true;
+        }
+        return false;
+    }
+
     public function ics($lean = false)
     {
         return $this->show($lean, true);

@@ -71,7 +71,7 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->useKetchup->meetings->add($meeting));
     }
 
-    public function testUpdateMeeting()
+    public function testUpdateDeleteMeeting()
     {
         $meeting            = new stdClass;
         $meeting->title     = 'ohai2';
@@ -82,9 +82,11 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
         $meeting = $this->useKetchup->meetings->getLastCreated();
         $meeting->attendees = 'Paul,Till';
 
-        // var_dump($meeting, $this->useKetchup->meetings->debugCall()); exit;
-
         $this->assertTrue($this->useKetchup->meetings->update($meeting));
+
+        // delete it :)
+        $this->assertTrue($this->useKetchup->meetings->delete($meeting));
+        
     }
 
     public function testShowMeetings()
@@ -118,6 +120,8 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
     }
 
     // Items
+
+    
 
     // Notes
 
