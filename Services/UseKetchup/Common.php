@@ -65,6 +65,14 @@ abstract class Services_UseKetchup_Common
     protected function parseResponse(HTTP_Request2_Response $resp)
     {
         $body = $resp->getBody();
+
+        $headers = $resp->getHeader();
+        if (isset($headers['content-type'])) {
+            if ($headers['content-type'] == 'text/calendar; charset=utf-8') {
+                return $body;
+            }
+        }
+
         switch ($body) {
         case 'Access Denied':
             throw new RuntimeException("API response: {$body}");
