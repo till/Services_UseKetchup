@@ -84,19 +84,19 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
 
     public function testPrevious()
     {
-        $previous = $this->useKetchup->meetings->previous();
+        $previous = $this->useKetchup->meetings->previous(true);
         $this->assertTrue(is_array($previous));
     }
 
     public function testUpcoming()
     {
-        $upcoming = $this->useKetchup->meetings->upcoming();
+        $upcoming = $this->useKetchup->meetings->upcoming(true);
         $this->assertTrue(is_array($upcoming));
     }
 
     public function testTodays()
     {
-        $todays = $this->useKetchup->meetings->todays();
+        $todays = $this->useKetchup->meetings->todays(true);
         $this->assertTrue(is_array($todays));
         $this->assertNotNull($todays);
     }
