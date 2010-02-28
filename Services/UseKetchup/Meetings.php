@@ -57,14 +57,19 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
 
     public function update($meeting)
     {
+        $id = $meeting->shortcode_url;
+
         $data = json_encode($meeting);
         $resp = $this->makeRequest(
-            '/meetings.json',
+            "/meetings/{$id}.json",
             HTTP_Request2::METHOD_PUT,
             $data
         );
         $data = $this->parseResponse($resp);
-        var_dump($data);
+        if ($data !== null) {
+            return true;
+        }
+        return false;
     }
 
     public function getLastCreated()

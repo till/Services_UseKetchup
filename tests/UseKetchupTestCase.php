@@ -71,6 +71,22 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->useKetchup->meetings->add($meeting));
     }
 
+    public function testUpdateMeeting()
+    {
+        $meeting            = new stdClass;
+        $meeting->title     = 'ohai2';
+        $meeting->attendees = 'Paul';
+
+        $this->useKetchup->meetings->add($meeting);
+
+        $meeting = $this->useKetchup->meetings->getLastCreated();
+        $meeting->attendees = 'Paul,Till';
+
+        // var_dump($meeting, $this->useKetchup->meetings->debugCall()); exit;
+
+        $this->assertTrue($this->useKetchup->meetings->update($meeting));
+    }
+
     public function testShowMeetings()
     {
         $meetings = $this->useKetchup->meetings->show();
