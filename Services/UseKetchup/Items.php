@@ -5,11 +5,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
 
     public function add($meeting, $item)
     {
-        if ($meeting instanceof stdClass) {
-            $id = $meeting->shortcode_url;
-        } else {
-            $id = $meeting;
-        }
+        $id = $this->guessId($meeting);
 
         $data = json_encode($item);
         $resp = $this->makeRequest(
@@ -27,11 +23,8 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
 
     public function delete($item)
     {
-        if ($item instanceof stdClass) {
-            $id = $item->shortcode_url;
-        } else {
-            $id = $item;
-        }
+        $id = $this->guessId($item);
+
         $resp = $this->makeRequest(
             "/items/{$id}.json",
             HTTP_Request2::METHOD_DELETE
@@ -45,11 +38,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
 
     public function show($meeting)
     {
-        if ($meeting instanceof stdClass) {
-            $id = $meeting->shortcode_url;
-        } else {
-            $id = $meeting;
-        }
+        $id = $this->guessId($meeting);
 
         $resp = $this->makeRequest("/meetings/{$id}/items.json");
         $data = $this->parseResponse($resp);
@@ -58,11 +47,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
 
     public function sort($meeting, $sort)
     {
-        if ($meeting instanceof stdClass) {
-            $id = $meeting->shortcode_url;
-        } else {
-            $id = $meeting;
-        }
+        $id = $this->guessId($meeting);
 
         $data = json_encode($sort);
         $resp = $this->makeRequest(

@@ -21,11 +21,8 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
 
     public function delete($meeting)
     {
-        if ($meeting instanceof stdClass) {
-            $id = $meeting->shortcode_url;
-        } else {
-            $id = $meeting;
-        }
+        $id = $this->guessId($meeting);
+
         $resp = $this->makeRequest(
             "/meetings/{$id}.json",
             HTTP_Request2::METHOD_DELETE

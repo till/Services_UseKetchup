@@ -40,6 +40,14 @@ abstract class Services_UseKetchup_Common
         return $this;
     }
 
+    protected function guessId($var)
+    {
+        if ($var instanceof stdClass) {
+            return $var->shortcode_url;
+        }
+        return $var;
+    }
+
     protected function makeRequest($url, $method = HTTP_Request2::METHOD_GET, $data = null)
     {
         if ($this->apiToken !== null) {
