@@ -66,7 +66,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
     {
         $id = $item->shortcode_url;
 
-        $data = json_encode($meeting);
+        $data = json_encode($item);
         $resp = $this->makeRequest(
             "/items/{$id}.json",
             HTTP_Request2::METHOD_PUT,
