@@ -20,6 +20,9 @@ class Services_UseKetchup_Projects extends Services_UseKetchup_Common
             $data
         );
         $data = $this->parseResponse($resp);
-        var_dump($data);
+        if ($data !== null) { 
+            return true;
+        }
+        return false;
     }
 }
