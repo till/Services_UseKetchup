@@ -12,11 +12,33 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
             $data
         );
         $data = $this->parseResponse($resp);
-        if (isset($data->project_id) && is_int($data->project_id)) {
+        if ($data !== null) {
             $this->lastCreated = $data;
             return true;
         }
         return false;
+    }
+
+    public function ics($lean = false)
+    {
+        return $this->show($lean, true);
+    }
+
+    public function show($lean = false, $ics = false)
+    {
+        $url = '/meetings.';
+        if ($ics === false) {
+            $url .= 'json';
+        } else {
+            $url .= 'ics';
+        }
+        if ($lean === true) {
+            $url .= '?lean=true';
+        }
+
+        $resp = $this->makeRequest($url);
+        $data = $this->parseResponse($resp);
+        return $data;
     }
 
     public function update($meeting)
