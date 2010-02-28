@@ -135,14 +135,26 @@ class UseKetchupTestCase extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->useKetchup->items->add($meeting, $item));
 
-        $lastCreated = $this->useKetchup->items->getLastCreated();
+        $item1 = $this->useKetchup->items->getLastCreated();
 
         $items = $this->useKetchup->items->show($meeting);
 
         $this->assertTrue(is_array($items));
         $this->assertNotEquals(0, count($items));
 
-        $this->assertTrue($this->useKetchup->items->delete($lastCreated));
+        $item2          = new stdClass;
+        $item2->content = 'another one';
+
+        $this->useKetchup->items->add($meeting, $item2);
+        $item2 = $this->useKetchup->items->getLastCreated();
+
+        $sort = new stdClass();
+        $sort->items = array($item2->shortcode_url, $item1->shortcode_url);
+
+        $this->assertTrue($this->useKetchup->items->sort($meeting, $sort));
+
+        $this->assertTrue($this->useKetchup->items->delete($item1));
+        $this->assertTrue($this->useKetchup->items->delete($item2));
 
         $this->useKetchup->meetings->delete($meeting);
     }    

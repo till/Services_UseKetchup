@@ -56,9 +56,25 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return $data;
     }
 
-    public function sort()
+    public function sort($meeting, $sort)
     {
-        throw new Exception("Not implemented.");
+        if ($meeting instanceof stdClass) {
+            $id = $meeting->shortcode_url;
+        } else {
+            $id = $meeting;
+        }
+
+        $data = json_encode($sort);
+        $resp = $this->makeRequest(
+            "/meetings/{$id}/sort_items.json",
+            HTTP_Request2::METHOD_PUT,
+            $data
+        );
+        $data = $this->parseResponse($resp);
+        if ($data !== null) {
+            return true;
+        }
+        return false;
     }
 
     public function update($item)
