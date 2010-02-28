@@ -21,6 +21,8 @@ class Services_UseKetchup extends Services_UseKetchup_Common
     {
         $this->username = $username;
         $this->password = $password;
+
+        $this->getApiToken();
     }
 
     public function __get($sub)
@@ -34,6 +36,7 @@ class Services_UseKetchup extends Services_UseKetchup_Common
         case 'User':
 
             if (!isset($this->subs[$sub])) {
+
                 $className = "Services_UseKetchup_{$sub}";
 
 
