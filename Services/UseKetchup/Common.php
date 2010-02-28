@@ -1,14 +1,25 @@
 <?php
 require_once 'HTTP/Request2.php';
 
-class Services_UseKetchup_Common
+abstract class Services_UseKetchup_Common
 {
     protected $password;
     protected $username;
 
     protected $apiToken;
 
+    protected $client;
+
     protected $endpoint = 'http://useketchup.com/api/v1';
+
+    public function debugCall()
+    {
+        return array(
+            'event' => $this->client->getLastEvent(),
+            'url'   => (string) $this->client->getUrl(),
+            'data'  => $this->client->getBody(),
+        );
+    }
 
     public function setApiToken($apiToken)
     {
@@ -34,8 +45,9 @@ class Services_UseKetchup_Common
             $url .= '?u=' . $this->apiToken;
         }
 
-        $req = new HTTP_Request2;
+        $req = $this->client = new HTTP_Request2;
         $req
+            ->setHeader('Content-Type: application/json')
             ->setAuth($this->username, $this->password)
             ->setMethod($method)
             ->setUrl($this->endpoint . $url);
@@ -51,7 +63,20 @@ class Services_UseKetchup_Common
 
     protected function parseResponse(HTTP_Request2_Response $resp)
     {
-        //var_dump($resp->getStatus());
-        return json_decode($resp->getBody());
+        $body = $resp->getBody();
+        switch ($body) {
+        case 'Access Denied':
+            throw new RuntimeException("API response: {$body}");
+        default:
+            $resp = json_decode($body);
+            if (isset($resp->status)) {
+                switch ($resp->status) {
+                case 'internal_server_error':
+                    var_dump($this->getLastRequestAndResponse()); exit;
+                    throw new RuntimeException($resp->message);
+                }
+            }
+            return $resp;
+        }
     }
 }
