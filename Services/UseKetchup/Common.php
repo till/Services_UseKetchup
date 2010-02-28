@@ -15,9 +15,10 @@ abstract class Services_UseKetchup_Common
     public function debugCall()
     {
         return array(
-            'event' => $this->client->getLastEvent(),
-            'url'   => (string) $this->client->getUrl(),
-            'data'  => $this->client->getBody(),
+            'event'  => $this->client->getLastEvent(),
+            'url'    => (string) $this->client->getUrl(),
+            'data'   => $this->client->getBody(),
+            'method' => $this->client->getMethod(),
         );
     }
 
@@ -72,7 +73,6 @@ abstract class Services_UseKetchup_Common
             if (isset($resp->status)) {
                 switch ($resp->status) {
                 case 'internal_server_error':
-                    var_dump($this->getLastRequestAndResponse()); exit;
                     throw new RuntimeException($resp->message);
                 }
             }
