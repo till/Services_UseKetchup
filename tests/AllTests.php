@@ -43,13 +43,22 @@
  * @link     http://github.com/till/Services_UseKetchup
  */
 
-set_include_path(dirname(dirname(__FILE__)) . ':' . get_include_path());
+$version = '@package_version@';
+if (strstr($version, 'package_version')) {
+    // we run in VCS
+    set_include_path(dirname(dirname(__FILE__)) . ':' . get_include_path());
+}
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Services_UseKetchup_AllTests::main');
+}
 
 /**
- * PHPUnit_Framework_TestCase
+ * PHPUnit related
  * @ignore
  */
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'PHPUnit/Framework.php';
+require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /**
  * *TestCase
