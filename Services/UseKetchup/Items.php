@@ -72,7 +72,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
      * @return boolean
      * @see    self::getLastCreated()
      */
-    public function add($meeting, $item)
+    public function add($meeting, stdClass $item)
     {
         $id = $this->guessId($meeting);
 
@@ -139,7 +139,7 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
      *
      * @return boolean
      */
-    public function sort($meeting, $sort)
+    public function sort($meeting, stdClass $sort)
     {
         $id = $this->guessId($meeting);
 
