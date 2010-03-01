@@ -55,15 +55,43 @@
  */
 abstract class Services_UseKetchup_Common
 {
+    /**
+     * @var string $password The password to your useketchup.com account.
+     * @see Services_UseKetchup::__construct()
+     * @see self::setPassword()
+     */
     protected $password;
+
+    /**
+     * @var string $username The username/email to your useketchup.com account.
+     * @see Services_UseKetchup::__construct()
+     * @see self::setUsername()
+     */
     protected $username;
 
+    /**
+     * @var string $apiToken Returned from useketchup.com.
+     * @see Services_UseKetchup::getApiToken()
+     */
     protected $apiToken;
 
+    /**
+     * @var HTTP_Request2 $client The client to talk to the API.
+     * @see self::makeRequest()
+     */
     protected $client;
 
+    /**
+     * @var string $endpoint The API endpoint.
+     */
     protected $endpoint = 'http://useketchup.com/api/v1';
 
+    /**
+     * Collect debug information on the last call.
+     *
+     * @return array
+     * @uses   self::$client
+     */
     public function debugCall()
     {
         return array(
@@ -74,32 +102,72 @@ abstract class Services_UseKetchup_Common
         );
     }
 
+    /**
+     * Set an API Token.
+     *
+     * @return $this
+     */
     public function setApiToken($apiToken)
     {
         $this->apiToken = $apiToken;
         return $this;
     }
 
+    /**
+     * Set password.
+     *
+     * @param string $password Password of your useketchup.com account.
+     *
+     * @return $this
+     */
     public function setPassword($password)
     {
         $this->password = $password;
         return $this;
     }
 
+    /**
+     * Set username.
+     *
+     * @param string $username Username/email of your useketchup.com account.
+     *
+     * @return $this 
+     */
     public function setUsername($username)
     {
         $this->username = $username;
         return $this;
     }
 
+    /**
+     * Try to guess the ID (aka shortcode_url) from the variable.
+     *
+     * @param mixed $var Either stdClass or a string.
+     *
+     * @return string
+     * @throws InvalidArgumentException When the stdClass has no shortcode_url.
+     */
     protected function guessId($var)
     {
         if ($var instanceof stdClass) {
+            if (!isset($var->shortcode_url)) {
+                throw new InvalidArgumentException("Object must have attribute shortcode_url.");
+            }
             return $var->shortcode_url;
         }
         return $var;
     }
 
+    /**
+     * Make an API request.
+     *
+     * @param string $url    The URL to request agains.
+     * @param string $method The request method.
+     * @param mixed  $data   Optional, most likely a json encoded string.
+     *
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception In case something goes wrong. ;)
+     */
     protected function makeRequest($url, $method = HTTP_Request2::METHOD_GET, $data = null)
     {
         if ($this->apiToken !== null) {
@@ -122,6 +190,14 @@ abstract class Services_UseKetchup_Common
         return $resp;
     }
 
+    /**
+     * Parse the response (from {@link self::makeRequest()}.
+     *
+     * @param HTTP_Request2_Response $resp The response returned from the API.
+     *
+     * @return mixed
+     * @throws RuntimeException In case the API returned an error.
+     */
     protected function parseResponse(HTTP_Request2_Response $resp)
     {
         $body = $resp->getBody();

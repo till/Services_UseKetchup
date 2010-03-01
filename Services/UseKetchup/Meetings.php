@@ -55,9 +55,21 @@
  */
 class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
 {
+    /**
+     * @var stdClass $lastCreated
+     * @see self::add()
+     * @see self::getLastCreated()
+     */
     protected $lastCreated;
 
-    public function add($meeting)
+    /**
+     * Add a new meeting.
+     *
+     * @param stdClass $meeting The meeting object.
+     *
+     * @return true
+     */
+    public function add(stdClass $meeting)
     {
         $data = json_encode($meeting);
         $resp = $this->makeRequest(
@@ -73,6 +85,14 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Delete a meeting.
+     *
+     * @param mixed $meeting Either a string, or stdClass.
+     *                       If stdClass, it must contain a shortcode_url attribute.
+     *
+     * @return boolean
+     */
     public function delete($meeting)
     {
         $id = $this->guessId($meeting);
@@ -88,16 +108,40 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Get an ICS calendar of your meetings.
+     *
+     * @param boolean $lean Lean = true, is faster, but less verbose.
+     *
+     * @return string
+     */
     public function ics($lean = false)
     {
         return $this->show($lean, true);
     }
 
+    /**
+     * Get all previous meetings.
+     *
+     * @param boolean $lean Lean = true, is faster, but less verbose.
+     *
+     * @return array An array stacked with stdClass.
+     */
     public function previous($lean = false)
     {
         return $this->show($lean, false, '/meetings/previous.');
     }
 
+    /**
+     * Get meetings.
+     *
+     * @param boolean $lean Lean = true, is faster, but less verbose.
+     * @param boolean $ics  If you'd like an ICS instead (see {@link self::ics()}.
+     * @param string  $url  Optional, for previous, upcoming, todays, etc..
+     *
+     * @return string|array String, if $ics = true, otherwise an array stacked with
+     *                      stdClass.
+     */
     public function show($lean = false, $ics = false, $url = '/meetings.')
     {
         if ($ics === false) {
@@ -114,18 +158,44 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return $data;
     }
 
+    /**
+     * Get todays meetings.
+     *
+     * @param boolean $lean Lean = true, is faster, but less verbose.
+     *
+     * @return array An array stacked with stdClass.
+     */
     public function todays($lean = false)
     {
         return $this->show($lean, false, '/meetings/todays.');
     }
 
+    /**
+     * Get all upcoming meetings.
+     *
+     * @param boolean $lean Lean = true, is faster, but less verbose.
+     *
+     * @return array An array stacked with stdClass.
+     */
     public function upcoming($lean = false)
     {
         return $this->show($lean, false, '/meetings/upcoming.');
     }
 
-    public function update($meeting)
+    /**
+     * Update a meeting.
+     *
+     * @param stdClass $meeting The meeting object.
+     *
+     * @return boolean
+     */
+    public function update(stdClass $meeting)
     {
+        if (!isset($meeting->shortcode_url)) {
+            throw InvalidArgumentException(
+                "Meeting object must contain attribute shortcode_url"
+            );
+        }
         $id = $meeting->shortcode_url;
 
         $data = json_encode($meeting);
@@ -141,6 +211,14 @@ class Services_UseKetchup_Meetings extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Get last created meeting.
+     *
+     * @return stdClass
+     * @uses   self::$lastCreated
+     * @see    self::add()
+     * @throws RuntimeException When called prior to add().
+     */
     public function getLastCreated()
     {
         if ($this->lastCreated === null) {

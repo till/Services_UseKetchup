@@ -55,14 +55,29 @@
  */
 class Services_UseKetchup_Projects extends Services_UseKetchup_Common
 {
-    public function show($lean = false)
+    /**
+     * Show all projects.
+     *
+     * @param boolean $lean If set to 'true', we save resources and it'll include less data.
+     *
+     * @return array An array stacked with objects.
+     * @todo   useketchup.com needs to implement ?lean=true
+     */
+    public function show(bool $lean = null)
     {
         $resp = $this->makeRequest('/projects.json');
         $data = $this->parseResponse($resp);
         return $data;
     }
 
-    public function update($project)
+    /**
+     * Update a project.
+     *
+     * @param stdClass $project The project object.
+     *
+     * @return boolean
+     */
+    public function update(stdClass $project)
     {
         $id = $project->id;
         unset($project->id);

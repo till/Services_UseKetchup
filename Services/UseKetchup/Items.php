@@ -55,8 +55,23 @@
  */
 class Services_UseKetchup_Items extends Services_UseKetchup_Common
 {
+    /**
+     * @var stdClass $lastCreated
+     * @see self::add()
+     * @see self::getLastCreated()
+     */
     protected $lastCreated;
 
+    /**
+     * Add an item to the given meeting.
+     *
+     * @param mixed    $meeting Either stdClass (with shortcode_url), or the
+     *                          shortcode_url of the item.
+     * @param stdClass $item    The item object.
+     *
+     * @return boolean
+     * @see    self::getLastCreated()
+     */
     public function add($meeting, $item)
     {
         $id = $this->guessId($meeting);
@@ -75,6 +90,14 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Delete an item.
+     *
+     * @param mixed $item Either stdClass (with shortcode_url), or the
+     *                    shortcode_url of the item.
+     *
+     * @return boolean
+     */
     public function delete($item)
     {
         $id = $this->guessId($item);
@@ -90,6 +113,14 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Show all items of a given meeting.
+     *
+     * @param mixed $meeting Either stdClass (with shortcode_url), or the
+     *                       shortcode_url of the item.
+     *
+     * @return array An array stacked with stdClass.
+     */
     public function show($meeting)
     {
         $id = $this->guessId($meeting);
@@ -99,6 +130,15 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return $data;
     }
 
+    /**
+     * Change sort order of items on a meeting.
+     *
+     * @param mixed    $meeting Either stdClass (with shortcode_url), or the
+     *                          shortcode_url of the item.
+     * @param stdClass $sort    {'items':['SHORTCODE_URL', 'SHORTCODE_URL']}
+     *
+     * @return boolean
+     */
     public function sort($meeting, $sort)
     {
         $id = $this->guessId($meeting);
@@ -116,9 +156,16 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return false;
     }
 
-    public function update($item)
+    /**
+     * Update an item.
+     * 
+     * @param stdClass $item The item object.
+     *
+     * @return boolean
+     */
+    public function update(stdClass $item)
     {
-        $id = $item->shortcode_url;
+        $id = $this->guessId($item);
 
         $data = json_encode($item);
         $resp = $this->makeRequest(
@@ -133,6 +180,14 @@ class Services_UseKetchup_Items extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Get last created meeting.
+     * 
+     * @return stdClass
+     * @uses   self::$lastCreated
+     * @see    self::add()
+     * @throws RuntimeException When called prior to add().
+     */
     public function getLastCreated()
     {
         if ($this->lastCreated === null) {

@@ -55,7 +55,14 @@
  */
 class Services_UseKetchup_User extends Services_UseKetchup_Common
 {
-    public function add($user)
+    /**
+     * Add a new user account to useketchup.com
+     *
+     * @param stdClass $user The object with user properties.
+     *
+     * @return boolean
+     */
+    public function add(stdClass $user)
     {
         $data = json_encode($user);
         $resp = $this->makeRequest(
@@ -70,7 +77,14 @@ class Services_UseKetchup_User extends Services_UseKetchup_Common
         return false;
     }
 
-    public function update($data)
+    /**
+     * Update the user. This works against whoever you are logged in with currently.
+     *
+     * @param stdClass $data The user data.
+     *
+     * @return boolean
+     */
+    public function update(stdClass $data)
     {
         $data = json_encode($data);
         $resp = $this->makeRequest(
@@ -85,6 +99,11 @@ class Services_UseKetchup_User extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * View the details of the currently authenticated/logged in user.
+     *
+     * @return stdClass
+     */
     public function view()
     {
         $resp = $this->makeRequest('/profile.json');

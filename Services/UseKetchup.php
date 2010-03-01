@@ -65,8 +65,22 @@ require_once 'Services/UseKetchup/Common.php';
  */
 class Services_UseKetchup extends Services_UseKetchup_Common
 {
-    protected $subs;
+    /**
+     * @var array $subs See self::__get()
+     */
+    protected $subs = array();
 
+    /**
+     * __construct
+     *
+     * Initialize the class, and get an API token.
+     *
+     * @param string $username The useketchup.com username/email.
+     * @param string $password The useketchup.com password.
+     *
+     * @return $this
+     * @see    self::getApiToken()
+     */
     public function __construct($username, $password)
     {
         $this->username = $username;
@@ -75,6 +89,14 @@ class Services_UseKetchup extends Services_UseKetchup_Common
         $this->getApiToken();
     }
 
+    /**
+     * Magic getter.
+     *
+     * @param string $sub Items, Meetings, Notes, Projects or User.
+     *
+     * @return mixed Services_UseKetchup_*
+     * @throws LogicException In case something unsupported is requested.
+     */
     public function __get($sub)
     {
         $sub = ucwords(strtolower($sub));
@@ -113,6 +135,13 @@ class Services_UseKetchup extends Services_UseKetchup_Common
         }
     }
 
+    /**
+     * Return/request an API token from useketchup. If one is already set, we return
+     * it instead of requesting one again.
+     *
+     * @return string
+     * @uses   self::$apiToken
+     */
     public function getApiToken()
     {
         if ($this->apiToken !== null) {
@@ -124,17 +153,5 @@ class Services_UseKetchup extends Services_UseKetchup_Common
         $this->apiToken = $data->single_access_token;
 
         return $this->apiToken;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-        return $this;
-    }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
     }
 }

@@ -55,9 +55,24 @@
  */
 class Services_UseKetchup_Notes extends Services_UseKetchup_Common
 {
+    /**
+     * @var stdClass $lastCreated
+     * @see self::add()
+     * @see self::getLastCreated()
+     */
     protected $lastCreated;
 
-    public function add($item, $note)
+    /**
+     * Add a note to an item.
+     *
+     * @param mixed $item    Either a string (an ID/shortcode_url), or a stdClass
+     *                       with an attribute shortcode_url.
+     * @param stdClass $note The note object.
+     *
+     * @return boolean
+     * @see    self::getLastCreated();
+     */
+    public function add($item, stdClass $note)
     {
         $id = $this->guessId($item);
 
@@ -75,6 +90,14 @@ class Services_UseKetchup_Notes extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Delete a note.
+     *
+     * @param mixed $note Either stdClass (with shortcode_url), or the shortcode_url
+     *                    of the node.
+     *
+     * @return boolean
+     */
     public function delete($note)
     {
         $id = $this->guessId($note);
@@ -90,6 +113,14 @@ class Services_UseKetchup_Notes extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Show all notes of a given item.
+     *
+     * @param mixed $item Either stdClass (with shortcode_url), or the shortcode_url 
+     *                    of the item.
+     *
+     * @return array An array stacked with stdClass.
+     */
     public function show($item)
     {
         $id = $this->guessId($item);
@@ -99,7 +130,14 @@ class Services_UseKetchup_Notes extends Services_UseKetchup_Common
         return $data;
     }
 
-    public function sort($item, $sort)
+    /**
+     * Change sort order of the given nodes on an item.
+     *
+     * @param mixed    $item Either stdClass (with shortcode_url), or the
+     *                       shortcode_url of the item.
+     * @param stdClass $sort {'notes':['SHORTCODE_URL', 'SHORTCODE_URL']}
+     */
+    public function sort($item, stdClass $sort)
     {
         $id = $this->guessId($item);
 
@@ -116,7 +154,15 @@ class Services_UseKetchup_Notes extends Services_UseKetchup_Common
         return false;
     }
 
-    public function update($note)
+    /**
+     * Update a note.
+     *
+     * @param stdClass $note The note object (must contain a shortcode_url
+     *                       attribute).
+     *
+     * @return boolean
+     */
+    public function update(stdClass $note)
     {
         $id = $note->shortcode_url;
 
@@ -133,6 +179,14 @@ class Services_UseKetchup_Notes extends Services_UseKetchup_Common
         return false;
     }
 
+    /**
+     * Get last created meeting.
+     *
+     * @return stdClass
+     * @uses   self::$lastCreated
+     * @see    self::add()
+     * @throws RuntimeException When called prior to add().
+     */
     public function getLastCreated()
     {
         if ($this->lastCreated === null) {
