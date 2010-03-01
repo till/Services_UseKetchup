@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Services_UseKetchup</name>
+ <channel>till.pearfarm.org</channel>
+ <summary>PHP API for useketchup.com</summary>
+ <description>This is an API wrapper for the useketchup.com API. You may use it to create projects, meetings, items, notes and also user accounts to the useketchup.com service.</description>
+ <lead>
+  <name>Till Klampaeckel</name>
+  <user>till</user>
+  <email>till@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-03-01</date>
+ <time>15:11:33</time>
+ <version>
+  <release>0.0.1</release>
+  <api>0.0.1</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>
+This is an alpha release, see README.md for examples.
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="Services">
+    <dir name="UseKetchup">
+     <file name="Common.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="Items.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="Meetings.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="Notes.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="Projects.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="User.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- /Services/UseKetchup -->
+    <file name="UseKetchup.php" role="php">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /Services -->
+   <dir name="tests">
+    <file name="AllTests.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="config.ini-dist" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="UseKetchupItemsTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="UseKetchupMeetingsTestCase.php" role="test" />
+    <file name="UseKetchupNotesTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="UseKetchupProjectsTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="UseKetchupTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="UseKetchupUserTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /tests -->
+   <file name="README.md" role="doc" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.1</min>
+   </php>
+   <pearinstaller>
+    <min>1.7.0</min>
+   </pearinstaller>
+   <package>
+    <name>PEAR</name>
+    <channel>pear.php.net</channel>
+   </package>
+   <package>
+    <name>HTTP_Request2</name>
+    <channel>pear.php.net</channel>
+    <min>0.5.1</min>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.0.1</release>
+    <api>0.0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-01</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+This is an alpha release, see README.md for examples.
+   </notes>
+  </release>
+ </changelog>
+</package>
