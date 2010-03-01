@@ -49,6 +49,16 @@
  */
 require_once dirname(__FILE__) . '/UseKetchupTestCase.php';
 
+/**
+ * UseKetchupNotesTestCase 
+ *
+ * @category Services
+ * @package  Services_UseKetchup
+ * @author   Till Klampaeckel <till@php.net>
+ * @license  http://www.opensource.org/licenses/bsd-license.php The BSD License
+ * @version  Release: @package_version@
+ * @link     http://github.com/till/Services_UseKetchup
+ */
 class UseKetchupNotesTestCase extends UseKetchupTestCase
 {
     // Notes
