@@ -27,7 +27,7 @@ $package->setOptions(
             'Services/Useketchup' => 'php',
             'tests'               => 'test',
         ),
-        'file_roles'              => array(
+        'exceptions'              => array(
             'README.md'           => 'doc',
         ),
         'ignore'                  => array(
