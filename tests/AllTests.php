@@ -45,6 +45,15 @@
 
 set_include_path(dirname(dirname(__FILE__)) . ':' . get_include_path());
 
+/**
+ * PHPUnit_Framework_TestCase
+ * @ignore
+ */
+require_once 'PHPUnit/Framework/TestCase.php';
+
+/**
+ * *TestCase
+ */
 require_once 'UseKetchupProjectsTestCase.php';
 require_once 'UseKetchupMeetingsTestCase.php';
 require_once 'UseKetchupItemsTestCase.php';
