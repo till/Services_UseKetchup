@@ -87,6 +87,21 @@ abstract class Services_UseKetchup_Common
     protected $endpoint = 'http://useketchup.com/api/v1';
 
     /**
+     * Acceptor pattern.
+     *
+     * @param mixed $var
+     *
+     * @return void
+     */
+    public function accept($var)
+    {
+        if ($var instanceof HTTP_Request2) {
+            $this->client = $var;
+        }
+        throw new InvalidArgumentException("Unknown: " . get_type($var));
+    }
+
+    /**
      * Collect debug information on the last call.
      *
      * @return array
@@ -174,18 +189,21 @@ abstract class Services_UseKetchup_Common
             $url .= '?u=' . $this->apiToken;
         }
 
-        $req = $this->client = new HTTP_Request2;
-        $req
+        if (!($this->client instanceof HTTP_Request2)) {
+            $this->client = new HTTP_Request2;
+        }
+
+        $this->client
             ->setHeader('Content-Type: application/json')
             ->setAuth($this->username, $this->password)
             ->setMethod($method)
             ->setUrl($this->endpoint . $url);
 
         if ($data !== null) {
-            $req->setBody($data);
+            $this->client->setBody($data);
         }
 
-        $resp = $req->send();
+        $resp = $this->client->send();
 
         return $resp;
     }
