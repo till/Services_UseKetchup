@@ -65,13 +65,6 @@ require_once 'Services/UseKetchup/Common.php';
  */
 class Services_UseKetchup extends Services_UseKetchup_Common
 {
-    protected $password;
-    protected $username;
-
-    protected $apiToken;
-
-    protected $endpoint = 'http://useketchup.com/api/v1';
-
     protected $subs;
 
     public function __construct($username, $password)
