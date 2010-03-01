@@ -35,7 +35,7 @@
  *
  * PHP version 5
  *
- * @category Services
+ * @category Testing
  * @package  Services_UseKetchup
  * @author   Till Klampaeckel <till@php.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php The BSD License
@@ -54,7 +54,7 @@ require_once 'UseKetchupUserTestCase.php';
 /**
  * Services_UseKetchup_AllTests
  *
- * @category Services
+ * @category Testing
  * @package  Services_UseKetchup
  * @author   Till Klampaeckel <till@php.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php The BSD License
