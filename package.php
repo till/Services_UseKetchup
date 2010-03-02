@@ -70,10 +70,10 @@ $files = array(
     'Services/UseKetchup/Notes.php', 'Services/UseKetchup/Projects.php',
     'Services/UseKetchup/User.php',
 // tests
-    'tests/AllTests.php', 'tests/config.ini-dist', 'UseKetchupMeetingsTestCase.php',
-    'tests/UseKetchupProjectsTestCase.php', 'tests/UseKetchupUserTestCase.php',
-    'tests/UseKetchupItemsTestCase.php', 'tests/UseKetchupNotesTestCase.php',
-    'tests/UseKetchupTestCase.php',
+    'tests/AllTests.php', 'tests/config.ini-dist', 'tests/UseKetchupBaseTestCase.php',
+    'tests/UseKetchupMeetingsTestCase.php', 'tests/UseKetchupProjectsTestCase.php',
+    'tests/UseKetchupUserTestCase.php', 'tests/UseKetchupItemsTestCase.php',
+    'tests/UseKetchupNotesTestCase.php', 'tests/UseKetchupTestCase.php',
 );
 
 foreach ($files as $file) {
