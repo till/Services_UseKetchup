@@ -31,6 +31,7 @@ $package->setOptions(
             'README.md'           => 'doc',
         ),
         'ignore'                  => array(
+            'coverage/*',
             'package.php',
             '.git',
             '.gitignore',
