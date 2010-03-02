@@ -13,11 +13,11 @@
   <email>till@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-03-01</date>
+ <date>2010-03-02</date>
  <time>15:11:33</time>
  <version>
-  <release>0.0.1</release>
-  <api>0.0.1</api>
+  <release>0.0.2</release>
+  <api>0.0.2</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -70,6 +70,10 @@ This is an alpha release, see README.md for examples.
      <tasks:replace from="@name@" to="name" type="package-info" />
      <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
+    <file name="UseKetchupBaseTestCase.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
     <file name="UseKetchupItemsTestCase.php" role="test">
      <tasks:replace from="@name@" to="name" type="package-info" />
      <tasks:replace from="@package_version@" to="version" type="package-info" />
@@ -116,6 +120,24 @@ This is an alpha release, see README.md for examples.
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>0.0.2</release>
+    <api>0.0.2</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-02</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+ * minor bug/style fixes
+ * made client a pseudo singleton
+ * added accept() (for dependency injection)
+ * covered Services_UseKetchup_Notes with tests
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.0.1</release>
