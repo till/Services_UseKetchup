@@ -89,5 +89,20 @@ class UseKetchupNotesTestCase extends UseKetchupTestCase
         $this->useKetchup->notes->add($item, $note2);
         $note2 = $this->useKetchup->notes->getLastCreated();
 
+        $notes = $this->useKetchup->notes->show($item);
+        $this->assertTrue(is_array($notes));
+        $this->assertEquals(2, count($notes));
+
+        $sort = new stdClass;
+        $sort->notes = array($note1->shortcode_url, $note1->shortcode_url);
+
+        $this->assertTrue($this->useKetchup->notes->sort($item, $sort));
+
+        $this->assertTrue($this->useKetchup->notes->delete($note1));
+
+        $note2->content = 'This is now #1';
+        $this->assertTrue($this->useKetchup->notes->update($note2));
+
+        $this->useKetchup->meetings->delete($meeting);
     }
 }
