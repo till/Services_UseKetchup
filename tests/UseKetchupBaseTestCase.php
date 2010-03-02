@@ -35,7 +35,7 @@
  *
  * PHP version 5
  *
- * @category Testing
+ * @category Testing 
  * @package  Services_UseKetchup
  * @author   Till Klampaeckel <till@php.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php The BSD License
@@ -43,79 +43,29 @@
  * @link     http://github.com/till/Services_UseKetchup
  */
 
-$version = '@package_version@';
-if (strstr($version, 'package_version')) {
-    // we run in VCS
-    set_include_path(dirname(dirname(__FILE__)) . ':' . get_include_path());
-}
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Services_UseKetchup_AllTests::main');
-}
-
 /**
- * PHPUnit related
+ * UseKetchupTestCase
  * @ignore
  */
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
+require_once dirname(__FILE__) . '/UseKetchupTestCase.php';
 
 /**
- * *TestCase
- */
-require_once 'UseKetchupBaseTestCase.php';
-require_once 'UseKetchupProjectsTestCase.php';
-require_once 'UseKetchupMeetingsTestCase.php';
-require_once 'UseKetchupItemsTestCase.php';
-require_once 'UseKetchupNotesTestCase.php';
-require_once 'UseKetchupUserTestCase.php';
-
-/**
- * Services_UseKetchup_AllTests
+ * UseKetchupBaseTestCase
  *
- * @category Testing
+ * @category Services
  * @package  Services_UseKetchup
  * @author   Till Klampaeckel <till@php.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php The BSD License
  * @version  Release: @package_version@
  * @link     http://github.com/till/Services_UseKetchup
  */
-class Services_UseKetchup_AllTests
+class UseKetchupBaseTestCase extends UseKetchupTestCase
 {
     /**
-     * Launches the TextUI test runner
-     *
-     * @return void
-     * @uses PHPUnit_TextUI_TestRunner
+     * @expectedException LogicException
      */
-    public static function main()
+    public function testMagicGetException()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        $this->useKetchup->foo->bar();
     }
-
-    /**
-     * Adds all class test suites into the master suite
-     *
-     * @return PHPUnit_Framework_TestSuite a master test suite
-     *                                     containing all class test suites
-     * @uses PHPUnit_Framework_TestSuite
-     */ 
-    public static function suite()
-    {
-        $suite = new PHPUnit_Framework_TestSuite(
-            'Services_UseKetchup Full Suite of Unit Tests');
-
-        $suite->addTestSuite('UseKetchupBaseTestCase');
-        $suite->addTestSuite('UseKetchupProjectsTestCase');
-        $suite->addTestSuite('UseKetchupMeetingsTestCase');
-        $suite->addTestSuite('UseKetchupItemsTestCase');
-        $suite->addTestSuite('UseKetchupNotesTestCase');
-        $suite->addTestSuite('UseKetchupUserTestCase');
-
-        return $suite;
-    }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Services_UseKetchup_AllTests::main') {
-    Services_UseKetchup_AllTests::main();
 }
