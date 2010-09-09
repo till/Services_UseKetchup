@@ -79,14 +79,11 @@ class Services_UseKetchup extends Services_UseKetchup_Common
      * @param string $password The useketchup.com password.
      *
      * @return $this
-     * @see    self::getApiToken()
      */
     public function __construct($username, $password)
     {
         $this->username = $username;
         $this->password = $password;
-
-        $this->getApiToken();
     }
 
     /**
@@ -96,9 +93,12 @@ class Services_UseKetchup extends Services_UseKetchup_Common
      *
      * @return mixed Services_UseKetchup_*
      * @throws LogicException In case something unsupported is requested.
+     * @uses   self::getApiToken()
      */
     public function __get($sub)
     {
+        $this->apiToken = $this->getApiToken();
+
         $sub = ucwords(strtolower($sub));
         switch ($sub) {
         case 'Items':
@@ -153,5 +153,18 @@ class Services_UseKetchup extends Services_UseKetchup_Common
         $this->apiToken = $data->single_access_token;
 
         return $this->apiToken;
+    }
+
+    /**
+     * To be able to mock requests, etc. later/
+     *
+     * @param string $token Required for each call.
+     *
+     * @retrun $this
+     */
+    public function setApiToken($token)
+    {
+        $this->apiToken = $token;
+        return $this;
     }
 }
