@@ -174,14 +174,19 @@ abstract class Services_UseKetchup_Common
     }
 
     /**
-     * Make an API request.
+     * Make an API request. Override the instance of HTTP_Request2 with
+     * {@link self::accept()} if you need to configure the object with a proxy or
+     * something similar.
      *
      * @param string $url    The URL to request agains.
-     * @param string $method The request method.
+     * @param string $method The request method ('GET', 'POST', 'PUT', etc.).
      * @param mixed  $data   Optional, most likely a json encoded string.
      *
      * @return HTTP_Request2_Response
      * @throws HTTP_Request2_Exception In case something goes wrong. ;)
+     * @uses   self::apiToken()
+     * @uses   self::$client
+     * @see    self::accept()
      */
     protected function makeRequest($url, $method = HTTP_Request2::METHOD_GET, $data = null)
     {
