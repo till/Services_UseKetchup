@@ -125,6 +125,16 @@ abstract class Services_UseKetchup_Common
     }
 
     /**
+     * Return the instance of HTTP_Request2 or null.
+     *
+     * @return mixed HTTP_Request2|null
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * Set an API Token.
      *
      * @return $this
