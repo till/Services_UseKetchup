@@ -98,7 +98,7 @@ abstract class Services_UseKetchup_Common
         if ($var instanceof HTTP_Request2) {
             $this->client = $var;
         }
-        throw new InvalidArgumentException("Unknown: " . get_type($var));
+        throw new InvalidArgumentException("Unknown: " . gettype($var));
     }
 
     /**
