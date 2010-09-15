@@ -95,10 +95,17 @@ abstract class Services_UseKetchup_Common
      */
     public function accept($var)
     {
-        if ($var instanceof HTTP_Request2) {
+        if (($var instanceof HTTP_Request2)) {
             $this->client = $var;
+            return;
         }
-        throw new InvalidArgumentException("Unknown: " . gettype($var));
+
+        $type = gettype($var);
+        if ($type == 'object') {
+            $type .= " (" . get_class($var) . ")";
+        }
+
+        throw new InvalidArgumentException("Unknown: " . $type);
     }
 
     /**
