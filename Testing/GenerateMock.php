@@ -99,10 +99,12 @@ class Testing_GenerateMock implements SplObserver
      * request:  GET /foobar
      * filename: GET_foobar
      *
+     * See {@link self::getFilename()} for the filename.
      * 
      * @param SplSubject $subject
      *
      * @return void
+     * @uses   self::getFilename()
      * @uses   self::$dir
      * @uses   self::$fp
      */
@@ -112,22 +114,8 @@ class Testing_GenerateMock implements SplObserver
 
         switch ($event['name']) {
         case 'receivedHeaders':
-            if ($disposition = $event['data']->getHeader('content-disposition')
-                && 0 == strpos($disposition, 'attachment')
-                && preg_match('/filename="([^"]+)"/', $disposition, $m)
-            ) {
-                $filename = basename($m[1]);
-            } else {
-                $filename = $subject->getMethod()
-                    . str_replace('/', '_', $subject->getUrl()->getPath());
 
-                $queryString = $subject->getUrl()->getQuery();
-                if ($queryString !== false && !empty($queryString)) {
-                    $filename .= "-" . str_replace('&', '_and_', $queryString);
-                }
-            }
-
-            var_dump($filename); exit;
+            $filename = $this->getFilename($subject);
 
             $target = $this->dir . DIRECTORY_SEPARATOR . $filename;
             if (!($this->fp = @fopen($target, 'wb'))) {
@@ -149,5 +137,53 @@ class Testing_GenerateMock implements SplObserver
             }
             break;
         }
+    }
+
+    /**
+     * Generate a filename from two parameters.
+     *
+     * @param Net_URL2 $url
+     * @param string   $method
+     *
+     * @return string
+     */
+    public static function generateFilename(Net_URL2 $url, $method)
+    {
+        $filename    = $method . str_replace('/', '_', $url->getPath());
+        $queryString = $url->getQuery();
+        if ($queryString !== false && !empty($queryString)) {
+            $filename .= "-" . str_replace('&', '_and_', $queryString);
+        }
+
+        return $filename;
+    }
+
+    /**
+     * Generate a filename.
+     *
+     * 1) The idea is that when the response contains an attachment, we use that name.
+     * 2) If not, we create a filename from METHOD-URL-QUERYSTRING
+     *
+     * @param SplSubject $subject
+     *
+     * @return string
+     * @uses   self::generateFilename()
+     * @see    self::update()
+     */
+    protected function getFilename(SplSubject $subject)
+    {
+        $event = $subject->getLastEvent();
+
+        if ($disposition = $event['data']->getHeader('content-disposition')
+                && 0 == strpos($disposition, 'attachment')
+                && preg_match('/filename="([^"]+)"/', $disposition, $m)
+        ) {
+            $filename = basename($m[1]);
+            return $filename;
+        }
+
+        $filename    = self::generateFilename($subject->getUrl(), $subject->getMethod());
+
+        return $filename;
     }
 }
