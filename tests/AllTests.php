@@ -61,7 +61,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /**
- * *TestCase
+ * TestCase
  */
 require_once 'UseKetchupBaseTestCase.php';
 require_once 'UseKetchupProjectsTestCase.php';
@@ -69,6 +69,12 @@ require_once 'UseKetchupMeetingsTestCase.php';
 require_once 'UseKetchupItemsTestCase.php';
 require_once 'UseKetchupNotesTestCase.php';
 require_once 'UseKetchupUserTestCase.php';
+
+/**
+ * Testing_GenerateMock
+ * @ignore
+ */
+require_once 'Testing/GenerateMock.php';
 
 /**
  * Services_UseKetchup_AllTests
