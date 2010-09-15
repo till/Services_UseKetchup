@@ -64,18 +64,32 @@ abstract class UseKetchupTestCase extends PHPUnit_Framework_TestCase
     protected $config;
     protected $newUserToTestWith;
     protected $useKetchup;
+    protected $request;
 
     public function setUp()
     {
         $conf = dirname(__FILE__) . '/config.ini';
         if (!file_exists($conf)) {
             $this->markTestIncomplete("You need a config.ini file.");
-        }
-        $this->config = parse_ini_file($conf);
 
-        $this->useKetchup = new Services_UseKetchup(
-            $this->config['username'],
-            $this->config['password']);
+            $this->useKetchup = new Services_UseKetchup('mock','mock');
+
+        } else {
+            $this->config = parse_ini_file($conf);
+
+            $this->useKetchup = new Services_UseKetchup(
+                $this->config['username'],
+                $this->config['password']);
+        }
+
+        /**
+         * Generate mocks. Only when we have a real user.
+         */
+        if (file_exists($conf)) {
+            $this->request = new HTTP_Request2;
+            $this->request->attach(new Testing_GenerateMock(dirname(__FILE__) . '/mock'));
+            $this->useKetchup->accept($this->request);
+        }
 
         $this->newUserToTestWith = 'till+' . mktime() . '@example.org';
     }
@@ -84,5 +98,6 @@ abstract class UseKetchupTestCase extends PHPUnit_Framework_TestCase
     {
         unset($this->config);
         unset($this->useKetchup);
+        unset($this->request);
     }
 }
