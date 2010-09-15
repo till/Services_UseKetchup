@@ -97,6 +97,8 @@ class Services_UseKetchup extends Services_UseKetchup_Common
      */
     public function __get($sub)
     {
+        $request = $this->getClient();
+
         $this->apiToken = $this->getApiToken();
 
         $sub = ucwords(strtolower($sub));
@@ -125,6 +127,10 @@ class Services_UseKetchup extends Services_UseKetchup_Common
                     ->setApiToken($this->apiToken)
                     ->setPassword($this->password)
                     ->setUsername($this->username);
+
+                if ($request instanceof HTTP_Request2) {
+                    $this->subs[$sub]->accept($request);
+                }
             }
             return $this->subs[$sub];
 
