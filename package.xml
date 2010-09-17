@@ -4,7 +4,7 @@
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Services_UseKetchup</name>
- <channel>till.pearfarm.org</channel>
+ <channel>pear.php.net</channel>
  <summary>PHP API for useketchup.com</summary>
  <description>This is an API wrapper for the useketchup.com API. You may use it to create projects, meetings, items, notes and also user accounts to the useketchup.com service.</description>
  <lead>
@@ -13,11 +13,11 @@
   <email>till@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-03-02</date>
+ <date>2010-09-17</date>
  <time>15:11:33</time>
  <version>
-  <release>0.0.2</release>
-  <api>0.0.2</api>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -25,7 +25,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-This is an alpha release, see README.md for examples.
+* bugfix: Services_UseKetchup_Common::accept() (did not exit after HTTP_Request2 was injected)
+* bugfix: make sure the custom HTTP_Request2 is injected into subs
+* refactoring: moved getApiToken() call from __construct()
+* improved documentation
+* added ublic getClient() method
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -120,6 +124,25 @@ This is an alpha release, see README.md for examples.
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-09-17</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+* bugfix: Services_UseKetchup_Common::accept() (did not exit after HTTP_Request2 was injected)
+* bugfix: make sure the custom HTTP_Request2 is injected into subs
+* refactoring: moved getApiToken() call from __construct() 
+* improved documentation
+* added ublic getClient() method
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.0.2</release>
