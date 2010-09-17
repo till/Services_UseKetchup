@@ -91,9 +91,9 @@ abstract class UseKetchupTestCase extends PHPUnit_Framework_TestCase
          * Generate mocks. Only when we have a real user.
          */
         if (file_exists($conf)) {
-            $this->request = new HTTP_Request2;
-            $this->request->attach(new Testing_GenerateMock(dirname(__FILE__) . '/mock'));
-            $this->useKetchup->accept($this->request);
+            // $this->request = new HTTP_Request2;
+            // $this->request->attach(new Testing_GenerateMock(dirname(__FILE__) . '/mock'));
+            // $this->useKetchup->accept($this->request);
         }
 
         $this->newUserToTestWith = 'till+' . mktime() . '@example.org';
