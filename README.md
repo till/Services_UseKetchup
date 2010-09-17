@@ -8,10 +8,9 @@ Welcome to the PHP API wrapper for [useketchup.com][1].
 
 We got two options, PEAR-based, and manual.
 
-### PEAR
+### PEAR (Yay, convenience!)
 
-    pear channel-discover till.pearfarm.org
-    pear install till.pearfarm.org/Services_UseKetchup-alpha
+    pear install Services_UseKetchup-alpha
 
 ### Manual
 
