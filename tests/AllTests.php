@@ -71,12 +71,6 @@ require_once 'UseKetchupNotesTestCase.php';
 require_once 'UseKetchupUserTestCase.php';
 
 /**
- * Testing_GenerateMock
- * @ignore
- */
-require_once 'Testing/GenerateMock.php';
-
-/**
  * Services_UseKetchup_AllTests
  *
  * @category Testing

@@ -70,7 +70,12 @@ abstract class UseKetchupTestCase extends PHPUnit_Framework_TestCase
     {
         $conf = dirname(__FILE__) . '/config.ini';
         if (!file_exists($conf)) {
+
             $this->markTestIncomplete("You need a config.ini file.");
+
+            if (!(include 'Testing/GenerateMock.php')) {
+                // prep
+            }
 
             $this->useKetchup = new Services_UseKetchup('mock','mock');
 
