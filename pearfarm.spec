@@ -5,7 +5,11 @@ $notes = "* bugfix: Services_UseKetchup_Common::accept() (did not exit after HTT
     . "\n" . "* improved documentation"
     . "\n" . "* added ublic getClient() method";
 
-$spec = Pearfarm_PackageSpec::create(array(Pearfarm_PackageSpec::OPT_BASEDIR => dirname(__FILE__)))
+$spec = Pearfarm_PackageSpec::create(
+    array(
+        Pearfarm_PackageSpec::OPT_BASEDIR => dirname(__FILE__),
+        Pearfarm_PackageSpec::OPT_DEBUG   => true,
+    ))
     ->setName('Services_UseKetchup')
     ->setChannel('till.pearfarm.org')
     ->setSummary('PHP API for useketchup.com')
@@ -16,6 +20,9 @@ $spec = Pearfarm_PackageSpec::create(array(Pearfarm_PackageSpec::OPT_BASEDIR => 
     ->setApiStability('alpha')
     ->setLicense(Pearfarm_PackageSpec::LICENSE_BSD)
     ->setNotes($notes)
+    ->addExcludeFiles(dirname(__FILE__) . '/Testing')
+    ->addExcludeFiles(dirname(__FILE__) . '/.gitignore')
+    ->addExcludeFiles(dirname(__FILE__) . '/package.php')
+    ->addExcludeFiles(dirname(__FILE__) . '/pearfarm.spec')
     ->addMaintainer('lead', 'Till Klampaeckel', 'till', 'till@php.net')
-    ->addGitFiles()
-    ->addExecutable('Services_UseKetchup');
+    ->addGitFiles();
