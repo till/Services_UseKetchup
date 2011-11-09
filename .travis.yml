@@ -1,0 +1,4 @@
+language: php
+php: 5.3.8
+before_script: pear install pear.php.net/HTTP_Request2
+script: phpunit --colors tests/AllTests.php
