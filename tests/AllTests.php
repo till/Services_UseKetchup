@@ -57,8 +57,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * PHPUnit related
  * @ignore
  */
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
+require_once 'PHPUnit/Autoload.php';
 
 /**
  * TestCase
