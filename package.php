@@ -3,10 +3,10 @@
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
-$api_version     = '0.0.1';
+$api_version     = '0.1.0';
 $api_state       = 'alpha';
 
-$release_version = '0.0.1';
+$release_version = '0.1.1';
 $release_state   = 'alpha';
 $release_notes   = "This is an alpha release, see README.md for examples.";
 
@@ -98,7 +98,7 @@ $package->setPhpDep('5.2.1');
 
 $package->addPackageDepWithChannel(
     'required',
-    'PEAR',
+    'PEAR_Exception',
     'pear.php.net'
 );
 
