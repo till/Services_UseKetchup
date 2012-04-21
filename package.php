@@ -44,7 +44,7 @@ $package->setOptions(
 $package->setPackage('Services_UseKetchup');
 $package->setSummary('PHP API for useketchup.com');
 $package->setDescription($description);
-$package->setChannel('till.pearfarm.org');
+$package->setChannel('pear.php.net');
 $package->setPackageType('php');
 $package->setLicense(
     'New BSD License',

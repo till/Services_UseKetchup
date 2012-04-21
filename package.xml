@@ -4,7 +4,7 @@
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Services_UseKetchup</name>
- <channel>till.pearfarm.org</channel>
+ <channel>pear.php.net</channel>
  <summary>PHP API for useketchup.com</summary>
  <description>This is an API wrapper for the useketchup.com API. You may use it to create projects, meetings, items, notes and also user accounts to the useketchup.com service.</description>
  <lead>
@@ -13,8 +13,8 @@
   <email>till@php.net</email>
   <active>yes</active>
  </lead>
- <date>2012-04-21</date>
- <time>00:45:25</time>
+ <date>2012-04-22</date>
+ <time>01:53:47</time>
  <version>
   <release>0.1.1</release>
   <api>0.1.0</api>
@@ -188,7 +188,7 @@ This is an alpha release, see README.md for examples.
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2012-04-21</date>
+   <date>2012-04-22</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
 This is an alpha release, see README.md for examples.
