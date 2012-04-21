@@ -1,4 +1,8 @@
 language: php
-php: 5.3.8
-before_script: pyrus install pear.php.net/HTTP_Request2
-script: phpunit --colors tests/AllTests.php
+php:
+  - 5.3
+  - 5.4
+before_script:
+  pyrus install pear.php.net/HTTP_Request2 && pyrus install pear.php.net/PEAR_Exception
+script:
+  phpunit --colors tests/AllTests.php
